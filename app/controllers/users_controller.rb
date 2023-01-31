@@ -5,15 +5,22 @@ class UsersController < ApplicationController
     @users = User.all
     render json: @users
   end
-
+  
+  # Register a new user to the database
   def create
     list_id = SecureRandom.alphanumeric(12)
     @user = User.new(name: params[:name], list_id: list_id)
     if @user.save
-      render json: {"msg": "Successfully Registered!"}, status: 200
+      render json: {"msg": "Successfully Registered!", "list_id": list_id}, status: 200
     else
-      render json: {"msg": "Retry to register", "list_id": list_id}, status: 400
+      render json: {"msg": "Retry to register"}, status: 400
     end
+  end
+
+  # Sign In a current user
+  def confirm
+
+
   end
 
   private
